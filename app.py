@@ -1,4 +1,5 @@
 import MFCC
+import audio
 import numpy as np
 import scipy.io.wavfile as wav
 from scipy.io import loadmat
@@ -8,6 +9,8 @@ import os
 import glob
 
 
+
+"""
 theta1 = loadmat('ml.mat')['theta1'];
 theta2 = loadmat('ml.mat')['theta2'];
 
@@ -35,17 +38,21 @@ pred = [];
 for i in range(len(Xtest)):
   pred.append(ml.predictWAV(theta1, theta2, Xtest[i])[0])
 print(np.mean(pred == ytest.flatten()) * 100)
-
+"""
 
 signal = []
 sample_rate = 16000
 while True:
-  cmd = input();
+  cmd = input("Digite um comando");
+  print("CMDZAO = " + str(cmd))
   if cmd == "record":
     seconds = 14
     print("recording...")
-    signal = sd.rec(int(seconds * sample_rate), samplerate = sample_rate, channels = 1)
-    sd.wait()
+    #_thread.start_new_thread (record_audio, ("plot_audio_thread", ))
+    #print('AQUI\n')
+    #signal = record_audio(seconds)
+    #signal = sd.rec(int(seconds * sample_rate), samplerate = sample_rate, channels = 1)
+    #sd.wait()
   elif cmd == "who":
     if not len(signal):
       print("no signal")
