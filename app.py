@@ -42,8 +42,8 @@ def main():
   signal = []
   sample_rate = 16000
 
-  th = threading.Thread(target=audio.plot_audio, args=(1,));
-  th.start()
+  #th = threading.Thread(target=audio.plot_audio, args=(1,));
+  #th.start()
   while True:
     cmd = input("Digite um comando");
     print("CMDZAO = " + str(cmd))
