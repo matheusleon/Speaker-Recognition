@@ -94,7 +94,7 @@ def main(signal, sample_rate):
   #sample_rate, signal = scipy.io.wavfile.read('00001.wav')
   #signal = signal[0:int(2 * sample_rate)]
 
-  printa(signal, "Original Signal")
+  #printa(signal, "Original Signal")
 
   emphasized_signal = pre_emphasis(signal)
 
