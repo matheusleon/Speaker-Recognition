@@ -57,6 +57,7 @@ def plot_audio(thread_name):
   fig.tight_layout(pad=0)
 
   stream = sd.InputStream(device=sd.default.device, channels=max(channels), samplerate=sample_rate, callback=audio_callback)
+<<<<<<< HEAD
   print("ky")
   ani = FuncAnimation(fig, update_plot, interval=interval, blit=True)
   print("xk")
@@ -68,6 +69,13 @@ def plot_audio(thread_name):
     continue
   print("ok")
   return 0
+=======
+  ani = FuncAnimation(fig, update_plot, interval=interval, blit=True)
+
+  with stream:
+    plt.show()
+
+>>>>>>> 82babe8e99bd391de00e4b49ab8d8744df7f7374
 def record_audio(seconds):
   print('Vai comecar a gravar o audio')
   eita = sd.rec(int(seconds * sample_rate), samplerate = sample_rate, channels = 1)
@@ -79,3 +87,9 @@ def record(seconds):
   _thread.start_new_thread (plot_audio, ("plot_audio_thread", ))
   signal = record_audio(seconds)
   return signal
+<<<<<<< HEAD
+=======
+  
+if __name__ == "__main__":
+  sys.exit(main()) 
+>>>>>>> 82babe8e99bd391de00e4b49ab8d8744df7f7374
