@@ -25,7 +25,6 @@ def main():
     sztraining = int(len(files)*0.6);
     for fid in range(sztraining):
       sample_rate, signal = wav.read(files[fid])
-      signal = signal[0:int(2 * sample_rate)]
       mfcc = MFCC.main(signal, sample_rate)
       for j in range (len(mfcc)):
         X.append([])
@@ -34,7 +33,6 @@ def main():
         y.append(i)
     for fid in range(sztraining, len(files)):
       sample_rate, signal = wav.read(files[fid])
-      signal = signal[0:int(2 * sample_rate)]
       mfcc = MFCC.main(signal, sample_rate)
       for j in range (len(mfcc)):
         Xtest.append([])
