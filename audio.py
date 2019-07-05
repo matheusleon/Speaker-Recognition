@@ -5,9 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sounddevice as sd
 import _thread
+
+from threading import Thread
+
 from matplotlib.animation import FuncAnimation
 from scipy.io.wavfile import write
 
+from PyQt5.QtWidgets import *
+from matplotlib.backends.backend_qt5agg import FigureCanvas
+from matplotlib.figure import Figure
 
 window = float(200)
 interval = float(50)
@@ -40,7 +46,7 @@ def update_plot(frame):
     line.set_ydata(plotdata[:, column])
   return lines
 
-def plot_audio(thread_name):
+def plot_audio(filename):
   length = int(window * sample_rate / (1000 * downsample))
 
   global plotdata, lines
@@ -56,23 +62,25 @@ def plot_audio(thread_name):
   fig.tight_layout(pad=0)
 
   stream = sd.InputStream(device=sd.default.device, channels=max(channels), samplerate=sample_rate, callback=audio_callback)
-  print("ky")
   ani = FuncAnimation(fig, update_plot, interval=interval, blit=True)
-  print("xk")
   with stream:
-    plt.show()
+    #plt.show()
+    plt.savefig(filename, dpi = 30)
   stream.close()
-  return 0
+  plt.close()
   
-def record_audio(seconds):
-  print('Vai comecar a gravar o audio')
+def record_audio(seconds, filename):
+  print('The recording has started...')
   eita = sd.rec(int(seconds * sample_rate), samplerate = sample_rate, channels = 1)
   sd.wait()
-  write('output.wav', sample_rate, eita)
-  print('Terminou de gravar')
+  write(filename, sample_rate, eita)
+  print('Finish record!')
 
-def record(seconds):
-  _thread.start_new_thread (plot_audio, ("plot_audio_thread", ))
-  signal = record_audio(seconds)
+#def startWaveform():
+  #t1 = Thread(target = plot_audio, args = [])
+  #1.start()
+  #_thread.start_new_thread (plot_audio, ())
+
+def record(seconds, filename):
+  signal = record_audio(seconds, filename)
   return signal
- 
